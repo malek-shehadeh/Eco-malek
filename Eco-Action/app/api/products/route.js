@@ -31,7 +31,7 @@ import Product from "../../../models/Product";
 export async function GET() {
   try {
     await dbConnect();
-    const products = await Product.find({ isDeletedAdmin: false });
+    const products = await Product.find({ isDeleted: false });
     return NextResponse.json(products);
   } catch (error) {
     console.error("Error in GET /api/products:", error);

@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -99,10 +98,19 @@ export default function CartPage() {
             >
               <div className="col-span-2 flex items-center gap-6">
                 <div className="w-28 h-28 shrink-0">
+                  {/* <img
+                    src={
+                      item.productId.images[0] ||
+                      "https://readymadeui.com/images/placeholder.webp"
+                    }
+                    className="w-full h-full object-contain"
+                    alt={item.productId.name}
+                  /> */}
                   <img
                     src={
-                      item.productId.image ||
-                      "https://readymadeui.com/images/placeholder.webp"
+                      item.productId.images && item.productId.images.length > 0
+                        ? item.productId.images[0]
+                        : "https://readymadeui.com/images/placeholder.webp"
                     }
                     className="w-full h-full object-contain"
                     alt={item.productId.name}

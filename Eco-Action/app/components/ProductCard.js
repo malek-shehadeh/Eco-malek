@@ -85,6 +85,7 @@ function ProductCard({ product }) {
       {/* ... (rest of the component remains the same) */}
 
       <div className="p-4">
+        <img src={product.images[0]} />
         <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
         <p className="text-gray-600 mb-4">{product.description}</p>
         <p className="font-bold">Price: ${product.price.toFixed(2)}</p>
