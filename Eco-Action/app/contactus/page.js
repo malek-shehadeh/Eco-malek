@@ -235,6 +235,357 @@
 // }
 //////////
 
+// "use client";
+
+// import React, { useState } from "react";
+// import { Phone, Mail, MapPin } from "lucide-react";
+// import Swal from "sweetalert2";
+
+// export default function ContactPage() {
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch("/api/contact", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ firstName, lastName, email, message }),
+//       });
+//       const data = await res.json();
+//       if (data.success) {
+//         Swal.fire(
+//           "Success!",
+//           "Your message has been sent successfully.",
+//           "success"
+//         );
+//         setFirstName("");
+//         setLastName("");
+//         setEmail("");
+//         setMessage("");
+//       } else {
+//         Swal.fire("Error!", data.error, "error");
+//       }
+//     } catch (error) {
+//       Swal.fire("Error!", "An error occurred. Please try again.", "error");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-sky-400">
+//       {/* Hero Section */}
+//       <div className="bg-sky-400 text-white py-16">
+//         <div className="container mx-auto px-4">
+//           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+//           <p className="text-xl text-white max-w-2xl">
+//             Do you need more information? Please contact us to find more about
+//             our products and services.
+//           </p>
+//         </div>
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="container mx-auto px-4 py-12">
+//         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+//           <div className="grid grid-cols-1 md:grid-cols-3">
+//             {/* Contact Form */}
+//             <div className="col-span-2 p-8">
+//               <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
+//               <form onSubmit={handleSubmit}>
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+//                   <div>
+//                     <input
+//                       type="text"
+//                       id="firstName"
+//                       value={firstName}
+//                       onChange={(e) => setFirstName(e.target.value)}
+//                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+//                       placeholder="First Name..."
+//                       required
+//                     />
+//                   </div>
+//                   <div>
+//                     <input
+//                       type="text"
+//                       id="lastName"
+//                       value={lastName}
+//                       onChange={(e) => setLastName(e.target.value)}
+//                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+//                       placeholder="Last Name..."
+//                       required
+//                     />
+//                   </div>
+//                 </div>
+//                 <div className="mb-6">
+//                   <input
+//                     type="email"
+//                     id="email"
+//                     value={email}
+//                     onChange={(e) => setEmail(e.target.value)}
+//                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+//                     placeholder="Email Here..."
+//                     required
+//                   />
+//                 </div>
+//                 <div className="mb-6">
+//                   <textarea
+//                     id="message"
+//                     rows={4}
+//                     value={message}
+//                     onChange={(e) => setMessage(e.target.value)}
+//                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+//                     placeholder="Your message"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="flex items-center mb-6">
+//                   <input
+//                     type="checkbox"
+//                     id="notRobot"
+//                     className="mr-2"
+//                     required
+//                   />
+//                   <label htmlFor="notRobot" className="text-sm text-gray-600">
+//                     I'm not a robot
+//                   </label>
+//                 </div>
+//                 <button
+//                   type="submit"
+//                   className={`w-full bg-sky-500 text-white py-2 px-4 rounded-md ${
+//                     loading
+//                       ? "opacity-50 cursor-not-allowed"
+//                       : "hover:bg-sky-600"
+//                   } transition-colors font-medium`}
+//                   disabled={loading}
+//                 >
+//                   {loading ? "Sending..." : "SEND MESSAGE"}
+//                 </button>
+//               </form>
+//             </div>
+
+//             {/* Contact Information */}
+//             <div className="bg-sky-500 text-white p-8">
+//               <h2 className="text-2xl font-semibold mb-6">
+//                 Contact information
+//               </h2>
+//               <div className="space-y-4">
+//                 <ContactItem
+//                   icon={<MapPin className="h-6 w-6" />}
+//                   content="345 Street 2, Bucharest"
+//                 />
+//                 <ContactItem
+//                   icon={<Phone className="h-6 w-6" />}
+//                   content="+16(3412) 421 241"
+//                 />
+//                 <ContactItem
+//                   icon={<Mail className="h-6 w-6" />}
+//                   content="contact@yoursite.com"
+//                 />
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function ContactItem({ icon, content }) {
+//   return (
+//     <div className="flex items-center">
+//       <div className="flex-shrink-0 mr-4">{icon}</div>
+//       <p>{content}</p>
+//     </div>
+//   );
+// }
+// /////////////////////////////////////////////////////////////////////////////////////////////
+// "use client";
+
+// import React, { useState } from "react";
+// import { Phone, Mail, MapPin } from "lucide-react";
+// import Swal from "sweetalert2";
+
+// export default function ContactPage() {
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch("/api/contact", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ firstName, lastName, email, message }),
+//       });
+//       const data = await res.json();
+//       if (data.success) {
+//         Swal.fire(
+//           "Success!",
+//           "Your message has been sent successfully.",
+//           "success"
+//         );
+//         setFirstName("");
+//         setLastName("");
+//         setEmail("");
+//         setMessage("");
+//       } else {
+//         Swal.fire("Error!", data.error, "error");
+//       }
+//     } catch (error) {
+//       Swal.fire("Error!", "An error occurred. Please try again.", "error");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-[#CDE8E5]">
+//       {/* Hero Section */}
+//       <div className="bg-[#CDE8E5] text-[#4D869C] py-3">
+//         <div className="container mx-auto px-4">
+//           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+//           <p className="text-xl text-[#7AB2B2] max-w-2xl">
+//             Do you need more information? Please contact us to find more about
+//             our products and services.
+//           </p>
+//         </div>
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="container mx-auto px-4">
+//         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+//           <div className="grid grid-cols-1 md:grid-cols-3">
+//             {/* Contact Form */}
+//             <div className="col-span-2 p-6">
+//               <h2 className="text-2xl font-semibold mb-6 text-[#4D869C]">
+//                 Send us a message
+//               </h2>
+//               <form onSubmit={handleSubmit} className="max-w-2xl">
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+//                   <div>
+//                     <input
+//                       type="text"
+//                       id="firstName"
+//                       value={firstName}
+//                       onChange={(e) => setFirstName(e.target.value)}
+//                       className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
+//                       placeholder="First Name..."
+//                       required
+//                     />
+//                   </div>
+//                   <div>
+//                     <input
+//                       type="text"
+//                       id="lastName"
+//                       value={lastName}
+//                       onChange={(e) => setLastName(e.target.value)}
+//                       className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
+//                       placeholder="Last Name..."
+//                       required
+//                     />
+//                   </div>
+//                 </div>
+//                 <div className="mb-4">
+//                   <input
+//                     type="email"
+//                     id="email"
+//                     value={email}
+//                     onChange={(e) => setEmail(e.target.value)}
+//                     className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
+//                     placeholder="Email Here..."
+//                     required
+//                   />
+//                 </div>
+//                 <div className="mb-4">
+//                   <textarea
+//                     id="message"
+//                     rows={3}
+//                     value={message}
+//                     onChange={(e) => setMessage(e.target.value)}
+//                     className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
+//                     placeholder="Your message"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="flex items-center mb-4">
+//                   <input
+//                     type="checkbox"
+//                     id="notRobot"
+//                     className="mr-2"
+//                     required
+//                   />
+//                   <label htmlFor="notRobot" className="text-sm text-[#7AB2B2]">
+//                     I'm not a robot
+//                   </label>
+//                 </div>
+//                 <button
+//                   type="submit"
+//                   className={`w-full bg-[#4D869C] text-white py-2 px-4 rounded-md ${
+//                     loading
+//                       ? "opacity-50 cursor-not-allowed"
+//                       : "hover:bg-[#7AB2B2]"
+//                   } transition-colors font-medium`}
+//                   disabled={loading}
+//                 >
+//                   {loading ? "Sending..." : "SEND MESSAGE"}
+//                 </button>
+//               </form>
+//             </div>
+
+//             {/* Contact Information */}
+//             <div className="bg-[#4D869C] text-white p-6">
+//               <h2 className="text-2xl font-semibold mb-6">
+//                 Contact information
+//               </h2>
+//               <div className="space-y-4">
+//                 <ContactItem
+//                   icon={<MapPin className="h-5 w-5" />}
+//                   content="345 Street 2, Jordan"
+//                 />
+//                 <ContactItem
+//                   icon={<Phone className="h-5 w-5" />}
+//                   content="+962786544235"
+//                 />
+//                 <ContactItem
+//                   icon={<Mail className="h-5 w-5" />}
+//                   content="contact@yoursite.com"
+//                 />
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function ContactItem({ icon, content }) {
+//   return (
+//     <div className="flex items-center">
+//       <div className="flex-shrink-0 mr-3">{icon}</div>
+//       <p>{content}</p>
+//     </div>
+//   );
+// }
+////////////////////////////
+
 "use client";
 
 import React, { useState } from "react";
@@ -282,12 +633,12 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-sky-400">
+    <div className="min-h-screen bg-[#CDE8E5]">
       {/* Hero Section */}
-      <div className="bg-sky-400 text-white py-16">
+      <div className="bg-[#CDE8E5] text-[#4D869C] py-3">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
-          <p className="text-xl text-white max-w-2xl">
+          <p className="text-xl text-[#7AB2B2] max-w-2xl">
             Do you need more information? Please contact us to find more about
             our products and services.
           </p>
@@ -295,21 +646,23 @@ export default function ContactPage() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="bg-[#EEF7FF] rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3">
             {/* Contact Form */}
-            <div className="col-span-2 p-8">
-              <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="col-span-2 p-6">
+              <h2 className="text-2xl font-semibold mb-6 text-[#4D869C]">
+                Send us a message
+              </h2>
+              <form onSubmit={handleSubmit} className="max-w-2xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
                     <input
                       type="text"
                       id="firstName"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
                       placeholder="First Name..."
                       required
                     />
@@ -320,51 +673,51 @@ export default function ContactPage() {
                       id="lastName"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
                       placeholder="Last Name..."
                       required
                     />
                   </div>
                 </div>
-                <div className="mb-6">
+                <div className="mb-4">
                   <input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
                     placeholder="Email Here..."
                     required
                   />
                 </div>
-                <div className="mb-6">
+                <div className="mb-4">
                   <textarea
                     id="message"
-                    rows={4}
+                    rows={3}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-[#CDE8E5] rounded-md focus:ring-2 focus:ring-[#7AB2B2] focus:border-transparent"
                     placeholder="Your message"
                     required
                   />
                 </div>
-                <div className="flex items-center mb-6">
+                <div className="flex items-center mb-4">
                   <input
                     type="checkbox"
                     id="notRobot"
                     className="mr-2"
                     required
                   />
-                  <label htmlFor="notRobot" className="text-sm text-gray-600">
+                  <label htmlFor="notRobot" className="text-sm text-[#7AB2B2]">
                     I'm not a robot
                   </label>
                 </div>
                 <button
                   type="submit"
-                  className={`w-full bg-sky-500 text-white py-2 px-4 rounded-md ${
+                  className={`w-full bg-[#4D869C] text-white py-2 px-4 rounded-md ${
                     loading
                       ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-sky-600"
+                      : "hover:bg-[#7AB2B2]"
                   } transition-colors font-medium`}
                   disabled={loading}
                 >
@@ -374,21 +727,21 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Information */}
-            <div className="bg-sky-500 text-white p-8">
+            <div className="bg-[#4D869C] text-white p-6">
               <h2 className="text-2xl font-semibold mb-6">
                 Contact information
               </h2>
               <div className="space-y-4">
                 <ContactItem
-                  icon={<MapPin className="h-6 w-6" />}
-                  content="345 Street 2, Bucharest"
+                  icon={<MapPin className="h-5 w-5" />}
+                  content="345 Street 2, Jordan"
                 />
                 <ContactItem
-                  icon={<Phone className="h-6 w-6" />}
-                  content="+16(3412) 421 241"
+                  icon={<Phone className="h-5 w-5" />}
+                  content="+962786544235"
                 />
                 <ContactItem
-                  icon={<Mail className="h-6 w-6" />}
+                  icon={<Mail className="h-5 w-5" />}
                   content="contact@yoursite.com"
                 />
               </div>
@@ -403,7 +756,7 @@ export default function ContactPage() {
 function ContactItem({ icon, content }) {
   return (
     <div className="flex items-center">
-      <div className="flex-shrink-0 mr-4">{icon}</div>
+      <div className="flex-shrink-0 mr-3">{icon}</div>
       <p>{content}</p>
     </div>
   );
